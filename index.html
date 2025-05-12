@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rate Your Experience</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 30px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    .stars {
+      font-size: 2.5rem;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .star.selected {
+      color: #FFD700;
+    }
+    #feedbackForm {
+      display: none;
+      margin-top: 20px;
+    }
+    textarea {
+      width: 80%;
+      max-width: 400px;
+      height: 100px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      resize: vertical;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>How would you rate your experience?</h2>
+  <div class="stars">
+    <span class="star" onclick="rate(1)">&#9733;</span>
+    <span class="star" onclick="rate(2)">&#9733;</span>
+    <span class="star" onclick="rate(3)">&#9733;</span>
+    <span class="star" onclick="rate(4)">&#9733;</span>
+    <span class="star" onclick="rate(5)">&#9733;</span>
+  </div>
+
+  <form id="feedbackForm" action="https://formsubmit.co/equimedia3@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="Low Rating Feedback">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" id="ratingInput" name="Rating">
+    <p>We're sorry to hear that. Please share your feedback below:</p>
+    <textarea name="Feedback" required></textarea><br>
+    <button type="submit">Send Feedback</button>
+  </form>
+
+  <script>
+    const stars = document.querySelectorAll('.star');
+    function rate(rating) {
+      stars.forEach((s, i) => s.classList.toggle('selected', i < rating));
+      if (rating <= 2) {
+        document.getElementById("ratingInput").value = rating;
+        document.getElementById("feedbackForm").style.display = "block";
+      } else {
+        // Redirect directly to Google Review write page
+        window.location.href = "https://search.google.com/local/writereview?placeid=ChIJXR0zOIA1wjsR2Q6lNDI-uR0";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
